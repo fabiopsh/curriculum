@@ -23,21 +23,21 @@ e software engineer.
   ([`scripts/prerender.mjs`](scripts/prerender.mjs)). Il curriculum è quindi
   leggibile per intero anche senza JavaScript, o se il bundle non arriva: un
   contenuto di testo statico non deve dipendere da un file JS per essere visibile.
-  Il client non idrata quel markup, lo rimpiazza al montaggio; per questo lo stato
-  iniziale reso dal server non deve combaciare con quello del client.
+  Il client **idrata** quel markup (`hydrateRoot`, non `createRoot`): l'HTML esistente
+  viene riusato invece di essere buttato e ricostruito, quindi un errore nel render
+  non può lasciare la pagina vuota. Per questo lo stato iniziale reso dal server
+  deve combaciare con quello del client — è la ragione per cui il tema passa da
+  `useSyncExternalStore` con uno snapshot server dedicato.
   Lo script verifica che ogni classe presente nel markup prerenderizzato esista
   nel CSS della build client, e fa fallire la build in caso contrario.
 - **Tema chiaro e scuro.** Segue l'impostazione del sistema operativo finché non
   si sceglie esplicitamente; la scelta viene poi ricordata. Uno script inline in
   `index.html` applica il tema prima del primo paint, così non c'è il lampo di colore.
-- **Animazioni discrete e che non possono nascondere il contenuto.** Le sezioni
-  compaiono in dissolvenza quando raggiungono il viewport. Il controllo è sulla
-  posizione assoluta e non sull'intersezione, perciò un salto di scorrimento
-  (ancora, ricerca nella pagina, tasto Fine) non può lasciare una sezione
-  invisibile. Lo stato nascosto richiede `data-motion="on"`, scritto dallo script
-  inline prima del primo paint: senza quel flag non si nasconde nulla, quindi un
-  errore di JavaScript fa perdere l'animazione, non il contenuto. Con
-  `prefers-reduced-motion: reduce` tutto parte già visibile.
+- **Nessuna regola CSS può nascondere il contenuto.** Una precedente versione
+  animava l'ingresso delle sezioni partendo da `opacity: 0`, e bastava che il
+  JavaScript non completasse per lasciare la pagina bianca. L'animazione è stata
+  rimossa: non valeva il rischio, e la sua assenza è ciò che permette di idratare
+  il markup prerenderizzato invece di sostituirlo.
 - **Stampa.** Un foglio di stile dedicato rende la pagina stampabile su carta con
   colori pieni e senza i controlli dell'interfaccia.
 - **Accessibilità.** Un solo `h1`, gerarchia dei titoli coerente, testo alternativo
@@ -61,7 +61,7 @@ src/
 ├── entry-server.tsx     ingresso usato dal prerender
 ├── data/cv.ts           contenuto del curriculum (unica fonte di verità)
 ├── components/          masthead, sezioni, voci, competenze, lingue, contatti
-├── hooks/               tema chiaro/scuro, rivelazione allo scorrimento
+├── hooks/               tema chiaro/scuro
 └── styles/              font, design token, base, stampa
 scripts/
 └── prerender.mjs        rende l'albero React in HTML e lo inietta in dist/

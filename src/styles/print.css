@@ -15,12 +15,6 @@
     --portrait-shadow: none;
   }
 
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
   [data-print-hidden] {
     display: none !important;
   }

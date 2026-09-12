@@ -35,10 +35,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/newsreader-300-600-normal-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-700-normal-latin.woff2" />
 
-    <!-- Eseguito prima del primo paint, in sintassi che interpreta qualsiasi browser.
-         Due compiti: applicare il tema salvato senza lampo di colore, e dichiarare
-         che JS e' vivo. Il CSS nasconde il contenuto da animare solo se trova
-         data-motion="on": senza questo flag la pagina resta leggibile in ogni caso. -->
+    <!-- Eseguito prima del primo paint, in sintassi che interpreta qualsiasi
+         browser: applica il tema salvato senza lampo di colore. Nessuna regola CSS
+         dipende da JavaScript per mostrare il contenuto. -->
     <script>
       ;(function () {
         var root = document.documentElement
@@ -51,20 +50,13 @@
         } catch (_) {
           /* storage non disponibile: resta il tema chiaro di default */
         }
-        try {
-          if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            root.setAttribute('data-motion', 'on')
-          }
-        } catch (_) {
-          /* senza il flag non si anima nulla, e va bene cosi' */
-        }
       })()
     </script>
   </head>
   <body>
     <!-- Il contenuto del curriculum viene iniettato qui in fase di build da
          scripts/prerender.mjs, cosi' la pagina e' leggibile anche senza JavaScript.
-         Il client non idrata questo markup: lo rimpiazza al montaggio. -->
+         Il client lo idrata, non lo sostituisce: se React non parte, resta questo. -->
     <div id="root"></div>
 
     <!-- Senza JavaScript il selettore del tema non puo' funzionare: meglio non mostrarlo. -->

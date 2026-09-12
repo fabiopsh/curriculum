@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 
-import { useReveal } from '../hooks/useReveal'
 import styles from './Section.module.css'
 
 interface SectionProps {
@@ -11,10 +10,8 @@ interface SectionProps {
 }
 
 export function Section({ id, index, title, children }: SectionProps) {
-  const { ref, state } = useReveal<HTMLElement>()
-
   return (
-    <section id={id} ref={ref} className={styles.section} data-reveal={state} aria-labelledby={`${id}-label`}>
+    <section id={id} className={styles.section} aria-labelledby={`${id}-label`}>
       <div className={styles.rail}>
         <span className={styles.index} aria-hidden="true">
           {index}

@@ -1,9 +1,18 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 
 export type Theme = 'light' | 'dark'
 
 const STORAGE_KEY = 'fp-theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'
+
+/**
+ * La fonte di verità del tema è l'attributo data-theme su <html>, scritto dallo
+ * script inline in index.html prima del primo paint. Leggerlo da lì invece di
+ * tenere uno stato React parallelo evita che i due divergano, e permette di
+ * dichiarare a React cosa ha reso il server durante il prerender: senza questo
+ * l'idratazione troverebbe un markup diverso da quello atteso.
+ */
+const listeners = new Set<() => void>()
 
 function readStoredTheme(): Theme | null {
   try {
@@ -14,53 +23,55 @@ function readStoredTheme(): Theme | null {
   }
 }
 
-function resolveInitialTheme(): Theme {
-  // Durante il prerender non esiste window: si parte dal tema chiaro e ci pensa
-  // lo script inline in index.html a scrivere quello giusto prima del paint.
-  if (typeof window === 'undefined') {
-    return 'light'
-  }
+function applyTheme(next: Theme): void {
+  document.documentElement.dataset.theme = next
 
-  return readStoredTheme() ?? (window.matchMedia(DARK_QUERY).matches ? 'dark' : 'light')
+  for (const listener of listeners) {
+    listener()
+  }
 }
 
-/**
- * Tema chiaro/scuro. Segue il sistema operativo finché l’utente non sceglie
- * esplicitamente; da quel momento la scelta viene ricordata.
- */
-export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(resolveInitialTheme)
+function subscribe(listener: () => void): () => void {
+  listeners.add(listener)
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-  }, [theme])
-
-  useEffect(() => {
-    const media = window.matchMedia(DARK_QUERY)
-
-    const followSystem = (event: MediaQueryListEvent) => {
-      if (readStoredTheme() === null) {
-        setTheme(event.matches ? 'dark' : 'light')
-      }
+  const media = window.matchMedia(DARK_QUERY)
+  const followSystem = () => {
+    // Finché l'utente non ha scelto esplicitamente, si segue il sistema.
+    if (readStoredTheme() === null) {
+      applyTheme(media.matches ? 'dark' : 'light')
     }
+  }
 
-    media.addEventListener('change', followSystem)
+  media.addEventListener('change', followSystem)
 
-    return () => media.removeEventListener('change', followSystem)
-  }, [])
+  return () => {
+    listeners.delete(listener)
+    media.removeEventListener('change', followSystem)
+  }
+}
+
+function getSnapshot(): Theme {
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+}
+
+/** Il prerender non ha un DOM da leggere: rende sempre la variante chiara. */
+function getServerSnapshot(): Theme {
+  return 'light'
+}
+
+export function useTheme() {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   const toggle = useCallback(() => {
-    setTheme((current) => {
-      const next: Theme = current === 'light' ? 'dark' : 'light'
+    const next: Theme = getSnapshot() === 'light' ? 'dark' : 'light'
 
-      try {
-        localStorage.setItem(STORAGE_KEY, next)
-      } catch {
-        /* storage non disponibile: la scelta vale solo per questa sessione */
-      }
+    try {
+      localStorage.setItem(STORAGE_KEY, next)
+    } catch {
+      /* storage non disponibile: la scelta vale solo per questa sessione */
+    }
 
-      return next
-    })
+    applyTheme(next)
   }, [])
 
   return { theme, toggle }

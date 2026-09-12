@@ -80,23 +80,6 @@ button {
   border-radius: 2px;
 }
 
-/* Rivelazione all'ingresso nel viewport.
-   Il contenuto e' visibile per default: lo stato nascosto vale solo se lo script
-   inline in index.html ha potuto scrivere data-motion="on" prima del primo paint
-   E l'elemento e' marcato 'out'. Cosi' un errore di JS, un bundle che il browser
-   non sa interpretare o un requestAnimationFrame sospeso non possono lasciare la
-   pagina bianca: al massimo si perde l'animazione. */
-[data-reveal] {
-  transition:
-    opacity 620ms var(--ease-out),
-    transform 620ms var(--ease-out);
-}
-
-:root[data-motion='on'] [data-reveal='out'] {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0);
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -105,10 +88,5 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
