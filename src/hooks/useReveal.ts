@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CSSProperties } from 'react'
 
 /** Soglia di ingresso: l’elemento si rivela quando entra nell’ultimo 10% del viewport. */
 const ENTER_RATIO = 0.9
@@ -56,35 +55,4 @@ export function useReveal<T extends HTMLElement>() {
   }, [revealed])
 
   return { ref, state: revealed ? ('in' as const) : ('out' as const) }
-}
-
-/**
- * Variante per il blocco di apertura, sempre a schermo al caricamento:
- * basta un frame per far partire la transizione.
- */
-export function useEntrance() {
-  const [entered, setEntered] = useState(motionIsUnwanted)
-
-  useEffect(() => {
-    if (entered) {
-      return
-    }
-
-    let inner = 0
-    const outer = requestAnimationFrame(() => {
-      inner = requestAnimationFrame(() => setEntered(true))
-    })
-
-    return () => {
-      cancelAnimationFrame(outer)
-      cancelAnimationFrame(inner)
-    }
-  }, [entered])
-
-  return entered ? ('in' as const) : ('out' as const)
-}
-
-/** Ritardo di stagger per l’animazione di ingresso, come custom property CSS. */
-export function revealDelay(ms: number): CSSProperties {
-  return { '--reveal-delay': `${ms}ms` } as CSSProperties
 }

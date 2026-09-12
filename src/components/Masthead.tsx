@@ -1,17 +1,14 @@
 import portrait from '../assets/fabio-piscitelli.jpg'
 import { contacts, cvFile, profile } from '../data/cv'
-import { revealDelay, useEntrance } from '../hooks/useReveal'
 import { DownloadIcon } from './Icons'
 import styles from './Masthead.module.css'
 
 const email = contacts.find((contact) => contact.id === 'email')
 
 export function Masthead() {
-  const state = useEntrance()
-
   return (
     <header className={styles.masthead}>
-      <div className={styles.identity} data-reveal={state}>
+      <div className={styles.identity}>
         <p className={styles.eyebrow}>{profile.location}</p>
         <h1 className={styles.name}>{profile.name}</h1>
         <p className={styles.roles}>
@@ -28,7 +25,7 @@ export function Masthead() {
         </p>
       </div>
 
-      <figure className={styles.portrait} data-reveal={state} style={revealDelay(90)}>
+      <figure className={styles.portrait}>
         <img
           src={portrait}
           width={600}
@@ -38,7 +35,7 @@ export function Masthead() {
         />
       </figure>
 
-      <div className={styles.lede} data-reveal={state} style={revealDelay(180)}>
+      <div className={styles.lede}>
         {profile.intro.map((paragraph) => (
           <p key={paragraph} className={styles.paragraph}>
             {paragraph}
