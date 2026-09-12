@@ -38,6 +38,14 @@ h3 {
   text-wrap: balance;
 }
 
+/* L'enfasi lavora sul colore oltre che sul peso: il testo corrente e' in
+   --ink-muted, quindi il salto a --ink e' cio' che la rende visibile a colpo
+   d'occhio senza appesantire la pagina. */
+strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 p {
   text-wrap: pretty;
 }

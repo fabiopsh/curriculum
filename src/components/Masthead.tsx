@@ -1,4 +1,5 @@
 import { contacts, cvFile, portraitFile, profile } from '../data/cv'
+import { Enfasi } from './Enfasi'
 import { DownloadIcon } from './Icons'
 import styles from './Masthead.module.css'
 
@@ -37,7 +38,7 @@ export function Masthead() {
       <div className={styles.lede}>
         {profile.intro.map((paragraph) => (
           <p key={paragraph} className={styles.paragraph}>
-            {paragraph}
+            <Enfasi testo={paragraph} />
           </p>
         ))}
 

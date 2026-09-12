@@ -1,4 +1,5 @@
 import { logoFile } from '../data/cv'
+import { Enfasi } from './Enfasi'
 import styles from './Entry.module.css'
 
 interface EntryProps {
@@ -25,13 +26,15 @@ export function Entry({ period, title, organization, logo, summary, highlights }
         {organization}
       </p>
 
-      <p className={styles.summary}>{summary}</p>
+      <p className={styles.summary}>
+        <Enfasi testo={summary} />
+      </p>
 
       {highlights && highlights.length > 0 && (
         <ul className={styles.highlights}>
           {highlights.map((highlight) => (
             <li key={highlight} className={styles.highlight}>
-              {highlight}
+              <Enfasi testo={highlight} />
             </li>
           ))}
         </ul>

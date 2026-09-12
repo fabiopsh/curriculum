@@ -64,8 +64,8 @@ export const profile = {
   roles: ['Solution Architect', 'Software Engineer'],
   location: 'Pisa, Italia',
   intro: [
-    "Ingegnere informatico con un doppio percorso: tre anni di sviluppo software in un’azienda di prodotto e un’esperienza imprenditoriale conclusa con un’exit, alla guida di una startup nel settore media e advertising cresciuta fino a 120.000 follower.",
-    'Frequento la laurea magistrale in Informatica a Pisa, curriculum ICT Solution Architect, con una tesi su inferenza AI distribuita e blockchain. Lavoro sulla progettazione di soluzioni tecniche e sulla gestione del prodotto end-to-end, dalla definizione dei requisiti al rilascio.',
+    "Ingegnere informatico con un doppio percorso: **tre anni di sviluppo software** in un’azienda di prodotto e un’esperienza imprenditoriale **conclusa con un’exit**, alla guida di una startup nel settore media e advertising cresciuta fino a **120.000 follower**.",
+    'Frequento la **laurea magistrale in Informatica a Pisa**, curriculum ICT Solution Architect, con una tesi su **inferenza AI distribuita e blockchain**. Lavoro sulla **progettazione di soluzioni tecniche** e sulla gestione del prodotto end-to-end, dalla definizione dei requisiti al rilascio.',
   ],
 } as const
 
@@ -76,12 +76,12 @@ export const experience: readonly Role[] = [
     title: 'Developer',
     organization: 'Uppwise',
     summary:
-      'Sviluppo frontend di un prodotto software in ambito finance e Strategic Portfolio Management.',
+      'Sviluppo frontend di un prodotto software in ambito **finance e Strategic Portfolio Management**.',
     highlights: [
-      "Presa in carico del prodotto dalla fase iniziale al rilascio in produzione e alle iterazioni successive, con responsabilità su definizione dei requisiti, scelte di architettura frontend e rilascio.",
-      "Realizzazione dell’interfaccia utente in React e TypeScript, integrazione con API REST e collaborazione continua con backend, design e product owner.",
-      'Integrazione di tecnologie AI nei flussi di finanza e Strategic Portfolio Management.',
-      'Code review, definizione degli standard di sviluppo e onboarding dei nuovi membri del team.',
+      "Presa in carico del prodotto **dalla fase iniziale al rilascio in produzione** e alle iterazioni successive, con responsabilità su definizione dei requisiti, scelte di architettura frontend e rilascio.",
+      "Realizzazione dell’interfaccia utente in **React e TypeScript**, integrazione con API REST e collaborazione continua con backend, design e product owner.",
+      'Integrazione di **tecnologie AI** nei flussi di finanza e Strategic Portfolio Management.',
+      'Code review, definizione degli **standard di sviluppo** e onboarding dei nuovi membri del team.',
     ],
   },
   {
@@ -90,13 +90,13 @@ export const experience: readonly Role[] = [
     title: 'Cofondatore e Direttore Creativo',
     organization: 'Traplist / Hip Hop Tender',
     summary:
-      "Startup di comunicazione e advertising per artisti emergenti, conclusa con un’exit.",
+      "Startup di comunicazione e advertising per artisti emergenti, **conclusa con un’exit**.",
     highlights: [
-      'Crescita della community fino a 120.000 follower e 5.000 clienti nei primi due anni di attività.',
-      'Acquisizione e integrazione del magazine Hip Hop Tender, con direzione artistica e responsabilità editoriale complessiva della testata.',
-      'Gestione di un team di 30 persone tra grafici, redattori e collaboratori esterni: selezione, coordinamento operativo e definizione dei processi di lavoro.',
-      'Responsabilità diretta della strategia di marketing, del posizionamento del brand e delle campagne pubblicitarie per i clienti.',
-      'Produzione di contenuti editoriali e conduzione di interviste ad artisti di rilievo della scena musicale italiana.',
+      'Crescita della community fino a **120.000 follower e 5.000 clienti** nei primi due anni di attività.',
+      'Acquisizione e integrazione del **magazine Hip Hop Tender**, con direzione artistica e responsabilità editoriale complessiva della testata.',
+      'Gestione di un **team di 30 persone** tra grafici, redattori e collaboratori esterni: selezione, coordinamento operativo e definizione dei processi di lavoro.',
+      'Responsabilità diretta della **strategia di marketing**, del posizionamento del brand e delle campagne pubblicitarie per i clienti.',
+      'Produzione di contenuti editoriali e conduzione di **interviste ad artisti di rilievo** della scena musicale italiana.',
     ],
   },
 ]
@@ -108,7 +108,7 @@ export const education: readonly Study[] = [
     title: 'Laurea Magistrale in Informatica',
     institution: 'Università di Pisa · curriculum ICT Solution Architect',
     thesis:
-      "Tesi in ambito blockchain: sviluppo di un framework per l’inferenza AI distribuita su rete peer-to-peer.",
+      "Tesi in ambito blockchain: sviluppo di un framework per l’**inferenza AI distribuita su rete peer-to-peer**.",
   },
   {
     id: 'unica',
@@ -116,7 +116,7 @@ export const education: readonly Study[] = [
     title: 'Laurea Triennale in Informatica',
     institution: 'Università degli Studi di Cagliari',
     thesis:
-      "Tesi sulla realizzazione di un algoritmo di ambient occlusion in ambito computer vision.",
+      "Tesi sulla realizzazione di un algoritmo di **ambient occlusion** in ambito computer vision.",
   },
 ]
 
