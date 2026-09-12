@@ -8,6 +8,8 @@ export interface Role {
   readonly period: string
   readonly title: string
   readonly organization: string
+  /** Nome del file in public/loghi/. Omesso, non viene reso alcun segno. */
+  readonly logo?: string
   readonly summary: string
   readonly highlights: readonly string[]
 }
@@ -37,6 +39,25 @@ export interface Contact {
   readonly value: string
   readonly href: string
 }
+
+/** Le sezioni della pagina, nell'ordine in cui appaiono. */
+export const sections = {
+  esperienza: { index: '01', title: 'Esperienza' },
+  formazione: { index: '02', title: 'Formazione' },
+  competenze: { index: '03', title: 'Competenze' },
+  lingue: { index: '04', title: 'Lingue' },
+  contatti: { index: '05', title: 'Contatti' },
+} as const
+
+export type SectionId = keyof typeof sections
+
+export const sectionOrder = [
+  'esperienza',
+  'formazione',
+  'competenze',
+  'lingue',
+  'contatti',
+] as const satisfies readonly SectionId[]
 
 export const profile = {
   name: 'Fabio Piscitelli',
@@ -176,3 +197,7 @@ export const contacts: readonly Contact[] = [
 
 export const cvFile = `${import.meta.env.BASE_URL}curriculum-fabio-piscitelli.pdf`
 export const portraitFile = `${import.meta.env.BASE_URL}fabio-piscitelli.jpg`
+
+export function logoFile(nome: string): string {
+  return `${import.meta.env.BASE_URL}loghi/${nome}`
+}

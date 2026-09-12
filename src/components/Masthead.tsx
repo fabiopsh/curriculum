@@ -6,7 +6,7 @@ const email = contacts.find((contact) => contact.id === 'email')
 
 export function Masthead() {
   return (
-    <header className={styles.masthead}>
+    <header id="top" className={styles.masthead}>
       <div className={styles.identity}>
         <p className={styles.eyebrow}>{profile.location}</p>
         <h1 className={styles.name}>{profile.name}</h1>

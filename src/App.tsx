@@ -3,10 +3,10 @@ import { Contacts } from './components/Contacts'
 import { Entry } from './components/Entry'
 import { Languages } from './components/Languages'
 import { Masthead } from './components/Masthead'
+import { Navbar } from './components/Navbar'
 import { Section } from './components/Section'
 import { Skills } from './components/Skills'
-import { ThemeToggle } from './components/ThemeToggle'
-import { education, experience } from './data/cv'
+import { education, experience, sections } from './data/cv'
 import { useTheme } from './hooks/useTheme'
 import styles from './App.module.css'
 
@@ -14,53 +14,54 @@ export default function App() {
   const { theme, toggle } = useTheme()
 
   return (
-    <div className={styles.page}>
-      <div className={styles.topbar} data-print-hidden data-needs-js>
-        <ThemeToggle theme={theme} onToggle={toggle} />
+    <>
+      <Navbar theme={theme} onToggle={toggle} />
+
+      <div className={styles.page}>
+        <Masthead />
+
+        <main>
+          <Section id="esperienza" {...sections.esperienza}>
+            {experience.map((role) => (
+              <Entry
+                key={role.id}
+                period={role.period}
+                title={role.title}
+                organization={role.organization}
+                logo={role.logo}
+                summary={role.summary}
+                highlights={role.highlights}
+              />
+            ))}
+          </Section>
+
+          <Section id="formazione" {...sections.formazione}>
+            {education.map((study) => (
+              <Entry
+                key={study.id}
+                period={study.period}
+                title={study.title}
+                organization={study.institution}
+                summary={study.thesis}
+              />
+            ))}
+          </Section>
+
+          <Section id="competenze" {...sections.competenze}>
+            <Skills />
+          </Section>
+
+          <Section id="lingue" {...sections.lingue}>
+            <Languages />
+          </Section>
+
+          <Section id="contatti" {...sections.contatti}>
+            <Contacts />
+          </Section>
+        </main>
+
+        <Colophon />
       </div>
-
-      <Masthead />
-
-      <main>
-        <Section id="esperienza" index="01" title="Esperienza">
-          {experience.map((role) => (
-            <Entry
-              key={role.id}
-              period={role.period}
-              title={role.title}
-              organization={role.organization}
-              summary={role.summary}
-              highlights={role.highlights}
-            />
-          ))}
-        </Section>
-
-        <Section id="formazione" index="02" title="Formazione">
-          {education.map((study) => (
-            <Entry
-              key={study.id}
-              period={study.period}
-              title={study.title}
-              organization={study.institution}
-              summary={study.thesis}
-            />
-          ))}
-        </Section>
-
-        <Section id="competenze" index="03" title="Competenze">
-          <Skills />
-        </Section>
-
-        <Section id="lingue" index="04" title="Lingue">
-          <Languages />
-        </Section>
-
-        <Section id="contatti" index="05" title="Contatti">
-          <Contacts />
-        </Section>
-      </main>
-
-      <Colophon />
-    </div>
+    </>
   )
 }

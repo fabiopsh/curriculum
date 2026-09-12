@@ -22,6 +22,7 @@
   /* Misure */
   --page-max: 68rem;
   --gutter: clamp(1.375rem, 5vw, 4rem);
+  --bar-height: 3rem;
   --rail: 10.5rem;
   --rail-gap: clamp(1.5rem, 4vw, 3.25rem);
   --measure: 66ch;
