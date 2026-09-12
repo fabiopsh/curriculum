@@ -38,10 +38,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Richiede che Pages sia già attivo sulla repository con sorgente
+      # "GitHub Actions" (Settings -> Pages -> Build and deployment -> Source).
+      # È un passaggio manuale una tantum: GITHUB_TOKEN non può creare il sito
+      # Pages da solo, perché l'operazione richiede permessi di amministrazione
+      # che il blocco `permissions:` di un workflow non può concedere.
       - name: Configura GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Carica l'artefatto
         uses: actions/upload-pages-artifact@v3
