@@ -80,11 +80,26 @@ Ogni push su `main` lancia il workflow
 [`deploy.yml`](.github/workflows/deploy.yml): installa, lint, build e pubblica
 `dist/` su GitHub Pages.
 
-**Prerequisito.** Pages deve essere attivo sulla repository con sorgente
-*Settings → Pages → Build and deployment → Source: **GitHub Actions***. È un
-passaggio manuale una tantum: il `GITHUB_TOKEN` del workflow non può creare il
-sito Pages da sé, perché l'operazione richiede permessi di amministrazione che
-il blocco `permissions:` di un workflow non può concedere.
+**Prerequisito, e la trappola da conoscere.** In *Settings → Pages → Build and
+deployment*, la sorgente **deve** essere **GitHub Actions**. Il valore predefinito
+dell'interfaccia è *Deploy from a branch*, e sceglierlo per errore rompe il sito in
+un modo che non lascia tracce nei log:
+
+- GitHub crea un secondo workflow, `pages-build-deployment` (visibile solo con
+  `gh api .../actions/workflows`, non nella cartella `.github/`), che gira a ogni
+  push **dopo** questo e ne sovrascrive la pubblicazione;
+- quel workflow serve la **radice della repository** invece di `dist/`, quindi
+  pubblica l'`index.html` sorgente di Vite: un `<div id="root">` vuoto e uno
+  `<script src="/src/main.tsx">` che nessun browser può eseguire;
+- risultato: **pagina bianca**, mentre `deploy.yml` continua a riportare successo
+  a ogni run.
+
+Sintomo che lo identifica in dieci secondi: se `https://<utente>.github.io/<repo>/package.json`
+risponde, Pages sta servendo la radice della repo e la sorgente è sbagliata.
+
+Il passaggio è manuale perché il `GITHUB_TOKEN` del workflow non può creare né
+riconfigurare il sito Pages: l'operazione richiede permessi di amministrazione,
+che il blocco `permissions:` di un workflow non può concedere.
 
 Il sito è servito da una sottocartella (`/curriculum/`), quindi
 `base: '/curriculum/'` in [`vite.config.ts`](vite.config.ts) deve restare
