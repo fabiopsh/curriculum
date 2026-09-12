@@ -1,0 +1,42 @@
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  :root {
+    --paper: #ffffff;
+    --paper-raised: #ffffff;
+    --ink: #000000;
+    --ink-muted: #333333;
+    --ink-faint: #555555;
+    --accent: #1f3d5a;
+    --rule: #cccccc;
+    --rule-strong: #999999;
+    --portrait-shadow: none;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-print-hidden] {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  li,
+  article {
+    break-inside: avoid;
+  }
+}

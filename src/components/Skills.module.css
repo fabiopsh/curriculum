@@ -1,0 +1,35 @@
+.groups {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.group {
+  max-inline-size: var(--measure);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.55rem;
+  margin-top: 0.7rem;
+}
+
+.item {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.item:not(:last-child)::after {
+  content: '·';
+  margin-inline-start: 0.55rem;
+  color: var(--rule-strong);
+}

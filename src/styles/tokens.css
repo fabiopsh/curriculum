@@ -1,0 +1,67 @@
+:root {
+  color-scheme: light;
+
+  /* Superfici e inchiostri */
+  --paper: #fbfaf8;
+  --paper-raised: #ffffff;
+  --ink: #17191c;
+  --ink-muted: #565b62;
+  --ink-faint: #6e737a;
+  --accent: #2e4f6e;
+  --accent-wash: rgb(46 79 110 / 8%);
+  --rule: #e4e1db;
+  --rule-strong: #cfcac2;
+  --selection: rgb(46 79 110 / 14%);
+  --portrait-shadow: 0 1px 2px rgb(23 25 28 / 6%), 0 18px 36px -24px rgb(23 25 28 / 45%);
+
+  /* Famiglie tipografiche */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Misure */
+  --page-max: 68rem;
+  --gutter: clamp(1.375rem, 5vw, 4rem);
+  --rail: 10.5rem;
+  --rail-gap: clamp(1.5rem, 4vw, 3.25rem);
+  --measure: 66ch;
+  --portrait-width: clamp(11.5rem, 22vw, 15.5rem);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --paper: #111315;
+  --paper-raised: #181b1e;
+  --ink: #e9e7e2;
+  --ink-muted: #a0a6ad;
+  --ink-faint: #7c828a;
+  --accent: #9cbedc;
+  --accent-wash: rgb(156 190 220 / 10%);
+  --rule: #26292d;
+  --rule-strong: #383c41;
+  --selection: rgb(156 190 220 / 20%);
+  --portrait-shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 18px 36px -24px rgb(0 0 0 / 70%);
+}
+
+/* Ricaduta per il caso in cui lo script inline non abbia potuto scrivere data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --paper: #111315;
+    --paper-raised: #181b1e;
+    --ink: #e9e7e2;
+    --ink-muted: #a0a6ad;
+    --ink-faint: #7c828a;
+    --accent: #9cbedc;
+    --accent-wash: rgb(156 190 220 / 10%);
+    --rule: #26292d;
+    --rule-strong: #383c41;
+    --selection: rgb(156 190 220 / 20%);
+    --portrait-shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 18px 36px -24px rgb(0 0 0 / 70%);
+  }
+}

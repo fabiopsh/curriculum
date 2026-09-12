@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fabio Piscitelli — Solution Architect &amp; Software Engineer</title>
+    <meta
+      name="description"
+      content="Curriculum di Fabio Piscitelli: solution architect e software engineer. Tre anni di sviluppo su prodotto in React e TypeScript, un’esperienza da cofondatore conclusa con un’exit, laurea magistrale ICT Solution Architect all’Università di Pisa."
+    />
+    <meta name="author" content="Fabio Piscitelli" />
+
+    <link rel="canonical" href="https://fabiopsh.github.io/curriculum/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Fabio Piscitelli" />
+    <meta property="og:title" content="Fabio Piscitelli — Solution Architect &amp; Software Engineer" />
+    <meta
+      property="og:description"
+      content="Tre anni di sviluppo su prodotto in React e TypeScript, un’esperienza da cofondatore conclusa con un’exit, laurea magistrale ICT Solution Architect all’Università di Pisa."
+    />
+    <meta property="og:url" content="https://fabiopsh.github.io/curriculum/" />
+    <meta property="og:image" content="https://fabiopsh.github.io/curriculum/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfaf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111315" />
+
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/newsreader-300-600-normal-latin.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-700-normal-latin.woff2" />
+
+    <!-- Applica il tema salvato prima del primo paint, per evitare il lampo di colore. -->
+    <script>
+      ;(function () {
+        try {
+          var saved = localStorage.getItem('fp-theme')
+          if (saved !== 'light' && saved !== 'dark') {
+            saved = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          document.documentElement.dataset.theme = saved
+        } catch (_) {
+          /* storage non disponibile: resta il tema chiaro di default */
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

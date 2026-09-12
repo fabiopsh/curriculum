@@ -1,0 +1,22 @@
+.toggle {
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  color: var(--ink-faint);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition:
+    color 180ms var(--ease-out),
+    border-color 180ms var(--ease-out);
+}
+
+.toggle:hover {
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+.icon {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
