@@ -59,15 +59,15 @@ public/
 
 ## Pubblicazione
 
-Ogni push sul branch di lavoro o su `main` lancia il workflow
+Ogni push su `main` lancia il workflow
 [`deploy.yml`](.github/workflows/deploy.yml): installa, lint, build e pubblica
 `dist/` su GitHub Pages.
 
-**Configurazione una tantum.** Prima del primo deploy occorre attivare Pages su
-*Settings → Pages → Build and deployment → Source: **GitHub Actions***. Il
-`GITHUB_TOKEN` del workflow non può farlo da sé: creare il sito Pages richiede
-permessi di amministrazione, che il blocco `permissions:` di un workflow non può
-concedere.
+**Prerequisito.** Pages deve essere attivo sulla repository con sorgente
+*Settings → Pages → Build and deployment → Source: **GitHub Actions***. È un
+passaggio manuale una tantum: il `GITHUB_TOKEN` del workflow non può creare il
+sito Pages da sé, perché l'operazione richiede permessi di amministrazione che
+il blocco `permissions:` di un workflow non può concedere.
 
 Il sito è servito da una sottocartella (`/curriculum/`), quindi
 `base: '/curriculum/'` in [`vite.config.ts`](vite.config.ts) deve restare
