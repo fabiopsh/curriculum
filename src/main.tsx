@@ -18,3 +18,8 @@ createRoot(container).render(
     <App />
   </StrictMode>,
 )
+
+// La ricaduta in index.html compare se #root e' ancora vuoto dopo 4 secondi.
+// Su una connessione molto lenta React puo' montare dopo quella soglia: qui la
+// si richiude, cosi' le due non restano mai visibili insieme.
+document.getElementById('fallback')?.setAttribute('hidden', '')
