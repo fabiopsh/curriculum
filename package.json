@@ -6,9 +6,10 @@
   "description": "Curriculum vitae di Fabio Piscitelli",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:client": "vite build"
   },
   "dependencies": {
     "react": "^19.2.8",

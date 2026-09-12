@@ -15,6 +15,12 @@ function readStoredTheme(): Theme | null {
 }
 
 function resolveInitialTheme(): Theme {
+  // Durante il prerender non esiste window: si parte dal tema chiaro e ci pensa
+  // lo script inline in index.html a scrivere quello giusto prima del paint.
+  if (typeof window === 'undefined') {
+    return 'light'
+  }
+
   return readStoredTheme() ?? (window.matchMedia(DARK_QUERY).matches ? 'dark' : 'light')
 }
 

@@ -175,3 +175,4 @@ export const contacts: readonly Contact[] = [
 ]
 
 export const cvFile = `${import.meta.env.BASE_URL}curriculum-fabio-piscitelli.pdf`
+export const portraitFile = `${import.meta.env.BASE_URL}fabio-piscitelli.jpg`

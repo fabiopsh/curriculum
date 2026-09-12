@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.topbar} data-print-hidden>
+      <div className={styles.topbar} data-print-hidden data-needs-js>
         <ThemeToggle theme={theme} onToggle={toggle} />
       </div>
 

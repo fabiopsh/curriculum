@@ -35,28 +35,6 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/newsreader-300-600-normal-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-700-normal-latin.woff2" />
 
-    <style>
-      /* Ricaduta mostrata solo se l'applicazione non arriva a montare. */
-      #fallback {
-        max-width: 32rem;
-        margin: 12vh auto;
-        padding: 0 1.5rem;
-        font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        color: #17191c;
-      }
-      #fallback h1 {
-        margin: 0 0 0.25rem;
-        font: 400 2rem/1.1 Georgia, 'Times New Roman', serif;
-      }
-      #fallback p {
-        margin: 0 0 1.25rem;
-        color: #565b62;
-      }
-      #fallback a {
-        color: #2e4f6e;
-      }
-    </style>
-
     <!-- Eseguito prima del primo paint, in sintassi che interpreta qualsiasi browser.
          Due compiti: applicare il tema salvato senza lampo di colore, e dichiarare
          che JS e' vivo. Il CSS nasconde il contenuto da animare solo se trova
@@ -84,35 +62,14 @@
     </script>
   </head>
   <body>
+    <!-- Il contenuto del curriculum viene iniettato qui in fase di build da
+         scripts/prerender.mjs, cosi' la pagina e' leggibile anche senza JavaScript.
+         Il client non idrata questo markup: lo rimpiazza al montaggio. -->
     <div id="root"></div>
 
-    <!-- Visibile solo se JS e' disattivato, oppure se il bundle non riesce a
-         montare l'applicazione (browser troppo vecchio, errore di rete). Meglio
-         un contatto raggiungibile che una pagina bianca. -->
-    <div id="fallback" hidden>
-      <h1>Fabio Piscitelli</h1>
-      <p>Solution Architect / Software Engineer — Pisa, Italia</p>
-      <p>
-        Questa pagina ha bisogno di JavaScript per essere mostrata. Il curriculum resta
-        disponibile in PDF:<br />
-        <a href="curriculum-fabio-piscitelli.pdf">scarica il curriculum</a>
-      </p>
-      <p>
-        <a href="mailto:fabiopiscitelli01@gmail.com">fabiopiscitelli01@gmail.com</a> ·
-        <a href="https://github.com/fabiopsh">github.com/fabiopsh</a>
-      </p>
-    </div>
-    <noscript><style>#fallback { display: block !important; }</style></noscript>
+    <!-- Senza JavaScript il selettore del tema non puo' funzionare: meglio non mostrarlo. -->
+    <noscript><style>[data-needs-js] { display: none !important; }</style></noscript>
 
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      setTimeout(function () {
-        var root = document.getElementById('root')
-        var fallback = document.getElementById('fallback')
-        if (root && fallback && root.children.length === 0) {
-          fallback.hidden = false
-        }
-      }, 4000)
-    </script>
   </body>
 </html>

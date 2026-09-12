@@ -1,5 +1,4 @@
-import portrait from '../assets/fabio-piscitelli.jpg'
-import { contacts, cvFile, profile } from '../data/cv'
+import { contacts, cvFile, portraitFile, profile } from '../data/cv'
 import { DownloadIcon } from './Icons'
 import styles from './Masthead.module.css'
 
@@ -27,7 +26,7 @@ export function Masthead() {
 
       <figure className={styles.portrait}>
         <img
-          src={portrait}
+          src={portraitFile}
           width={600}
           height={750}
           alt={`Ritratto fotografico di ${profile.name}`}
